@@ -14,13 +14,18 @@ return new class extends Migration
     public function up()
     {
 
-        Schema::create('stations', function (Blueprint $t) {
-            $t->id();
-            $t->string("name");
-            $t->string("code")->nullable();
-            $t->boolean("status")->default(true);
-            $t->timestamps();
-        });
+         // Tabla: stations
+    Schema::create('stations', function (Blueprint $table) {
+        $table->id();
+        $table->text('name');
+        $table->text('code')->nullable();
+        $table->boolean('status')->default(true);
+        $table->unsignedBigInteger('id_city')->nullable();
+        $table->timestamps();
+        $table->softDeletes();
+
+        
+    });
     }
 
     /**
