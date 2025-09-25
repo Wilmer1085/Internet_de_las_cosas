@@ -14,17 +14,19 @@ return new class extends Migration
     public function up()
     {
         Schema::create('cities', function (Blueprint $table) {
-        $table->id();
-        $table->string('name');
-        $table->string('code')->nullable();
-        $table->string('abbrev')->nullable();
-        $table->boolean('status')->default(true);
-        $table->unsignedBigInteger('id_department')->nullable();
-        $table->timestamps();
-        $table->softDeletes();
+    $table->id();
+    $table->string('name');
+    $table->string('code')->unique();
+    $table->string('abbrev', 10)->nullable();
+    $table->boolean('status')->default(true);
 
-      
-    });
+    $table->foreignId('id_department')
+          ->constrained('departments')
+          ->onDelete('cascade');
+
+    $table->timestamps();
+    $table->softDeletes();
+});
     }
 
     /**
