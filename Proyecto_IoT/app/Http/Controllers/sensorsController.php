@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\sensors;
+use App\Models\Sensor;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\departments;
+use App\Models\Department;
 
 
 class SensorController extends Controller
 {
     public function index()
     {
-        $sensors = sensors::with('department.country')->paginate(10);
-        return view('sensors.index', compact('sensors'));
+        $sensors = Sensor::with('Department.country')->paginate(10);
+        return view('Sensor.index', compact('Sensor'));
     }
 
     public function create()
     {
-        $departments = departments::orderBy('name')->get();
-        return view('sensors.create', compact('departments'));
+        $departments = Department::orderBy('name')->get();
+        return view('Sensor.create', compact('Department'));
     }
 
     public function store(Request $request)
@@ -33,7 +33,7 @@ class SensorController extends Controller
             'status'        => 'nullable'
         ]);
 
-        sensors::create([
+        Sensor::create([
             'name'          => $data['name'],
             'code'          => $data['code'],
             'abbrev'        => $data['abbrev'] ?? null,
@@ -41,6 +41,6 @@ class SensorController extends Controller
             'status'        => $request->boolean('status'),
         ]);
 
-        return redirect()->route('sensors.index')->with('ok', 'Sensor creado');
+        return redirect()->route('Sensor.index')->with('ok', 'Sensor creado');
     }
 }

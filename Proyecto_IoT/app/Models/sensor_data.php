@@ -2,18 +2,26 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class sensor_data extends Model
+class SensorData extends Model
 {
-    use HasFactory;
-
-    protected $table = 'sensor_data'; // 👈 Asegúrate de tener esto
-
-    protected $fillable = [
-        'sensor_name',
-        'value',
-        // agrega los campos que tengas en tu tabla
+    use SoftDeletes;
+    protected $guarded = [];
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime'
     ];
+
+    public function station()
+    {
+        return $this->belongsTo(Station::class, 'id_station');
+    }
+
+    public function sensor()
+    {
+        return $this->belongsTo(Sensor::class, 'id_sensor');
+    }
 }
+

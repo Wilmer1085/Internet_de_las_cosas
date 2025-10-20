@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Station;
-use App\Models\sensor_data;
-use App\Models\sensors;
+use App\Models\Sensor_data;
+use App\Models\Sensor;
 
 class DashboardController extends Controller
 {
@@ -15,8 +15,8 @@ class DashboardController extends Controller
     {
         // Métricas básicas
         $stations = Station::with('city')->orderBy('name')->get();
-        $sensorsOnline = sensors::where('status', true)->count();
-        $lastSync = sensor_data::max('created_at');
+        $sensorsOnline = Sensor::where('status', true)->count();
+        $lastSync = Sensor_data::max('created_at');
         $dbDriver = strtoupper(config('database.default'));
 
         return view('index', compact('stations','sensorsOnline','lastSync','dbDriver'));
