@@ -8,7 +8,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class SensorData extends Model
 {
     use SoftDeletes;
+
+    protected $table = 'sensor_data';
+
     protected $guarded = [];
+
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime'

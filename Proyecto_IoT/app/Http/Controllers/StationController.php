@@ -3,81 +3,43 @@
 namespace App\Http\Controllers;
 
 use App\Models\Station;
+use App\Models\City; // 👈 Asegúrate de importar City
 use Illuminate\Http\Request;
 
 class StationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $stations = Station::with('city')->get();
+        return view('stations.index', compact('stations'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $cities = City::all();
+        return view('stations.create', compact('cities'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Station  $station
-     * @return \Illuminate\Http\Response
-     */
     public function show(Station $station)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Station  $station
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Station $station)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Station  $station
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Station $station)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Station  $station
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Station $station)
     {
         //

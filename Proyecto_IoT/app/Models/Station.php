@@ -10,6 +10,8 @@ class Station extends Model
     use SoftDeletes;
     protected $guarded = [];
 
+    protected $table = 'stations';
+
     public function city()
     {
         return $this->belongsTo(City::class, 'id_city');
@@ -20,4 +22,5 @@ class Station extends Model
         return $this->hasMany(SensorData::class, 'id_station');
     }
 }
+
 

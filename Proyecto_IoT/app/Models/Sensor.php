@@ -10,7 +10,7 @@ class Sensor extends Model
     use SoftDeletes;
     protected $guarded = [];
 
-    protected $table = 'sensors'; // 👈 fuerza el nombre en minúsculas para evitar el error
+    protected $table = 'sensors';
 
     public function department()
     {
@@ -19,7 +19,7 @@ class Sensor extends Model
 
     public function data()
     {
-        return $this->hasMany(SensorData::class, 'id_sensor');
+        return $this->hasMany(Sensor_data::class, 'id_sensor');
     }
 }
 
